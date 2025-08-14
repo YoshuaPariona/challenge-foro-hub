@@ -26,7 +26,7 @@ public class TopicController {
     }
 
     @GetMapping
-    public Page<DataListTopic> listTopic(@PageableDefault(size=5, sort = {"title"}) Pageable pageable) {
+    public Page<DataListTopic> listTopic(@PageableDefault(size=5, sort = {"creationDate"}) Pageable pageable) {
         return topicRepository.findAllByStatusTrue(pageable).map(DataListTopic::new);
     }
 }

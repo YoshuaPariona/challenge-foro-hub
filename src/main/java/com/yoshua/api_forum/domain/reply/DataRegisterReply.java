@@ -1,13 +1,10 @@
-package com.yoshua.api_forum.domain.topic;
+package com.yoshua.api_forum.domain.reply;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record DataRegisterTopic(
-        @NotBlank
-        String title,
-
+public record DataRegisterReply(
         @NotBlank
         String message,
 
@@ -16,7 +13,7 @@ public record DataRegisterTopic(
         Long userId,
 
         @NotNull
-        @JsonAlias("course_id")
-        Long courseId
+        @JsonAlias("topic_id")
+        Long topicId
 ) {
 }
