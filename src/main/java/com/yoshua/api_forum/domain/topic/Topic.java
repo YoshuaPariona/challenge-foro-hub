@@ -9,12 +9,12 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
+@Table(name = "topics")
+@Entity(name = "Topic")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode()
-@Table(name = "topics")
-@Entity(name = "Topic")
 public class Topic {
 
     @Id
@@ -27,6 +27,12 @@ public class Topic {
     private String title;
     private String message;
     private Boolean status;
+        /*
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    */
     private Long userId;
     private Long courseId;
 

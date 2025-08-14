@@ -1,5 +1,6 @@
 package com.yoshua.api_forum.domain.reply;
 
+import com.yoshua.api_forum.domain.topic.Topic;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,12 +10,12 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
+@Table(name = "replies")
+@Entity(name = "Reply")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode()
-@Table(name = "replies")
-@Entity(name = "Reply")
 public class Reply {
 
     @Id
@@ -24,18 +25,12 @@ public class Reply {
     @CreationTimestamp
     private LocalDate creationDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topic_id")
+    private Topic topic;
+
     private String message;
     private Boolean solution;
-
     private Long userId;
-    private Long topicId;
 
-    public Reply(DataRegisterReply dataReply) {
-        this.replyId = null;
-        this.message = dataReply.message();
-        this.solution = false;
-        this.userId = dataReply.userId();
-        this.topicId = dataReply.topicId();
-
-    }
 }
