@@ -26,11 +26,9 @@ public class TopicController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DataDetailTopic> registerTopic(@RequestBody @Valid DataRegisterTopic dataTopic,
-                                                         UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<DataDetailTopic> registerTopic(@RequestBody @Valid DataRegisterTopic dataTopic, UriComponentsBuilder uriComponentsBuilder) {
         var detailTopic = topicService.registerTopic(dataTopic);
         URI uri = uriComponentsBuilder.path("/topics/{id}").buildAndExpand(detailTopic.topicId()).toUri();
-
         return ResponseEntity.created(uri).body(detailTopic);
     }
 
@@ -41,20 +39,13 @@ public class TopicController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DataDetailTopic> returnTopic(@PathVariable Long id) {
-        if(!topicRepository.existsById(id)) {
-            throw new ValidationException("No existe un tópico con el id proporcionado.");
-        }
         var topic = topicRepository.getReferenceById(id);
-
         return ResponseEntity.ok(new DataDetailTopic(topic));
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity<DataDetailTopic> updateTopic(@RequestBody @Valid DataUpdateTopic dataTopic) {
-        if(!topicRepository.existsById(dataTopic.topicId())) {
-            throw new ValidationException("No existe un tópico con el id proporcionado.");
-        }
         var topic = topicRepository.getReferenceById(dataTopic.topicId());
         topic.updateTopic(dataTopic);
         return ResponseEntity.ok(new DataDetailTopic(topic));
@@ -62,9 +53,6 @@ public class TopicController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTopic(@PathVariable Long id) {
-        if(!topicRepository.existsById(id)) {
-            throw new ValidationException("No existe un tópico con el id proporcionado.");
-        }
         topicRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
