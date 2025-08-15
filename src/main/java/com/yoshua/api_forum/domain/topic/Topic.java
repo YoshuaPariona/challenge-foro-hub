@@ -1,5 +1,7 @@
 package com.yoshua.api_forum.domain.topic;
 
+import com.yoshua.api_forum.domain.course.Course;
+import com.yoshua.api_forum.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,24 +26,16 @@ public class Topic {
     @CreationTimestamp
     private LocalDate creationDate;
 
-    private String title;
-    private String message;
-    private Boolean status;
-        /*
     @ManyToOne
     @JoinColumn(name = "user_id")
+    private User user;
+
     @ManyToOne
     @JoinColumn(name = "course_id")
-    */
-    private Long userId;
-    private Long courseId;
+    private Course course;
 
-    public Topic(DataRegisterTopic dataTopic) {
-        this.topicId = null;
-        this.title = dataTopic.title();
-        this.message = dataTopic.message();
-        this.status = false;
-        this.userId = dataTopic.userId();
-        this.courseId = dataTopic.courseId();
-    }
+    private String title;
+    private String message;
+    private String status;
+
 }
