@@ -38,4 +38,15 @@ public class Topic {
     private String message;
     private String status;
 
+    public void updateTopic(DataUpdateTopic dataUpdateTopic) {
+        if(dataUpdateTopic.title() != null) {
+            this.title = dataUpdateTopic.title();
+        }
+        if(dataUpdateTopic.message() != null) {
+            this.message = dataUpdateTopic.message();
+        }
+        if(dataUpdateTopic.status() != null) {
+            this.status = dataUpdateTopic.status();
+        }
+    }
 }

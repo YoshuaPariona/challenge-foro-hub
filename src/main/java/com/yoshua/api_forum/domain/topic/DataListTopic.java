@@ -6,6 +6,7 @@ public record DataListTopic(
         Long topicId,
         String title,
         String message,
+        String status,
         LocalDate creationDate
 ) {
     public DataListTopic(Topic topic) {
@@ -13,6 +14,7 @@ public record DataListTopic(
                 topic.getTopicId(),
                 topic.getTitle(),
                 topic.getMessage(),
+                topic.getStatus(),
                 topic.getCreationDate()
         );
     }
